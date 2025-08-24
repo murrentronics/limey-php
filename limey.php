@@ -1733,16 +1733,45 @@ function limey_profile_page_shortcode($atts = []) {
         text-align: center;
         margin-bottom: 32px;
     }
-    
-    .user-avatar {
-        width: 96px;
-        height: 496px;
+    .profile-avatar1 {
+        width: 36px;
+        height: 36px;
         border-radius: 50%;
-        border: 2px solid white;
+        border: 2px solid green;
         object-fit: cover;
         cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
     }
     
+    .profile-avatar1:hover {
+        opacity: 0.9;
+    }
+    
+     .profile-avatar1-placeholder {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(92, 204, 69, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
+        font-weight: bold;
+        color: #5ccc45;
+        margin-bottom: 16px;
+        border: 3px solid #5ccc45;
+        cursor: pointer;
+    }
+    //-------need this-----//
+    .profile-avatar {
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        border: 2px solid green;
+        object-fit: cover;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+    }
     .profile-avatar:hover {
         opacity: 0.9;
     }
@@ -2331,9 +2360,39 @@ function limey_profile_page_shortcode($atts = []) {
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
     }
     
+    .user-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 2px solid green;
+        object-fit: cover;
+        background: #333;
+    }
+    
+    .user-avatar-placeholder {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 2px solid white;
+        background: #5ccc45;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        font-weight: bold;
+        color: white;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+    
+    .user-avatar:hover {
+        border-color: #4CAF50;
+    }
+    
+    
     .video-modal .user-avatar {
-        width: 48px;
-        height: 48px;
+        width: 36px;
+        height: 36px;
         border-radius: 50%;
         border: 2px solid white;
         object-fit: cover;
@@ -2577,11 +2636,28 @@ function limey_profile_page_shortcode($atts = []) {
     }
     
     .video-modal-item .user-avatar {
-        width: 48px;
-        height: 48px;
+        width: 36px;
+        height: 36px;
         border-radius: 50%;
-        border: 2px solid white;
+        border: 2px solid green;
         object-fit: cover;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .video-modal-item .user-avatar-placeholder {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(92, 204, 69, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
+        font-weight: bold;
+        color: #5ccc45;
+        margin-bottom: 16px;
+        border: 3px solid #5ccc45;
         cursor: pointer;
     }
     
@@ -2970,44 +3046,6 @@ function limey_profile_page_shortcode($atts = []) {
         background: #dc3545;
     }
     /* Avatar styles */
-
-
- .profile-avatar-placeholder {
-        width: 96px;
-        height: 96px;
-        border-radius: 50%;
-        background: rgba(92, 204, 69, 0.2);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 48px;
-        font-weight: bold;
-        color: #5ccc45;
-        margin-bottom: 16px;
-        border: 3px solid #5ccc45;
-        cursor: pointer;
-    }
-.avatar-edit-icon {
-    position: absolute;
-    bottom: 16px;
-    right: -8px;
-    width: 32px;
-    height: 32px;
-    background: #5ccc45;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    cursor: pointer;
-    border: 2px solid #1a1a1a;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    transition: all 0.3s ease;
-}
-.avatar-edit-icon:hover {
-    background: #4CAF50;
-    transform: scale(1.1);
-}
 /* Lightbox modal styles */
 .video-modal {
     display: none;
@@ -3066,7 +3104,7 @@ function limey_profile_page_shortcode($atts = []) {
             <!-- Avatar -->
                 <div style="position: relative; display: inline-block;">
                     <?php if ($profile && $profile->avatar_url): ?>
-                        <img src="<?php echo esc_url($profile->avatar_url); ?>" alt="Profile" class="user-avatar" <?php echo $is_own_profile ? 'onclick="openProfileImageModal()"' : ''; ?>>
+                        <img src="<?php echo esc_url($profile->avatar_url); ?>" alt="Profile" class="profile-avatar" <?php echo $is_own_profile ? 'onclick="openProfileImageModal()"' : ''; ?>>
                     <?php else: ?>
                         <div class="profile-avatar-placeholder" <?php echo $is_own_profile ? 'onclick="openProfileImageModal()"' : ''; ?>>
                             <?php echo strtoupper(substr($profile->username ?? 'U', 0, 1)); ?>
@@ -3192,9 +3230,9 @@ function limey_profile_page_shortcode($atts = []) {
                                     </div>
                                     <div class="video-creator">
                                         <?php if ($video->profile_avatar): ?>
-                                            <img src="<?php echo esc_url($video->profile_avatar); ?>" alt="Creator" class="creator-avatar" onclick="event.stopPropagation(); navigateToProfile('<?php echo esc_js($video->profile_username ?: $video->username); ?>')">
+                                            <img src="<?php echo esc_url($video->profile_avatar); ?>" alt="Creator"  class="profile-avatar1" onclick="event.stopPropagation(); navigateToProfile('<?php echo esc_js($video->profile_username ?: $video->username); ?>')">
                                         <?php else: ?>
-                                            <div class="creator-avatar-placeholder" onclick="event.stopPropagation(); navigateToProfile('<?php echo esc_js($video->profile_username ?: $video->username); ?>')">
+                                            <div class="profile-avatar-placeholder1" onclick="event.stopPropagation(); navigateToProfile('<?php echo esc_js($video->profile_username ?: $video->username); ?>')">
                                                 <?php echo strtoupper(substr($video->profile_username ?: $video->username ?: 'U', 0, 1)); ?>
                                             </div>
                                         <?php endif; ?>
@@ -4754,7 +4792,7 @@ function limey_video_feed_shortcode() {
     
     .global-mute-btn {
         position: fixed;
-        top: 80px;
+        top: 100px;
         right: 16px;
         z-index: 40;
         width: 48px;
@@ -4791,15 +4829,15 @@ function limey_video_feed_shortcode() {
         top: 0;
         left: 0;
         right: 0;
-        height: 64px;
+        height: 70px;
         background: #000;
         z-index: 10;
     }
     
     .video-container {
         position: absolute;
-        top: 64px;
-        bottom: 64px;
+        top: 70px;
+        bottom: 96px;
         left: 0;
         right: 0;
         overflow: hidden;
@@ -4808,7 +4846,7 @@ function limey_video_feed_shortcode() {
     .video-player {
         width: 100%;
         height: 90%;
-        object-fit: cover;
+        
         background: #000;
         border-radius: 8px;
     }
@@ -4912,7 +4950,7 @@ function limey_video_feed_shortcode() {
         display: flex;
         align-items: center;
         gap: 8px;
-        color: white;
+        color: green;
         font-size: 12px;
         font-weight: 600;
     }
@@ -4977,7 +5015,7 @@ function limey_video_feed_shortcode() {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 24px;
+        gap: 20px;
     }
     
     .action-group {
@@ -5014,19 +5052,6 @@ function limey_video_feed_shortcode() {
         font-weight: 500;
     }
     
-    .user-avatar {
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 3px solid #5ccc45;
-        cursor: pointer;
-        transition: border-color 0.3s ease;
-    }
-    
-    .user-avatar:hover {
-        border-color: #4CAF50;
-    }
     
     .follow-btn {
         position: absolute;
@@ -5290,10 +5315,7 @@ function limey_video_feed_shortcode() {
             font-size: 24px;
         }
         
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-        }
+        
         
         .follow-btn {
             width: 20px;
@@ -5349,26 +5371,45 @@ function limey_video_feed_shortcode() {
     .toast.error {
         background: #dc3545;
     }
+    .limey-glow-outline {
+    font-size: 30px; /* Reduced from 72px to 40px */
+    font-family: Arial, sans-serif;
+    color: #fff; /* Fill color white */
+    display: inline-block;
+    padding: -10px 20px; /* Reduced padding for less height and space */
+    /* Thinner green outline */
+    -webkit-text-stroke: 1px #28a745; /* For modern browsers */
+    text-stroke: 1px #28a745;
+
+    /* Fallback for browsers without text-stroke */
+    text-shadow:
+        -1px -1px 0 #28a745,
+        1px -1px 0 #28a745,
+        -1px 1px 0 #28a745,
+        1px 1px 0 #28a745;
+
+    /* Pulsing glow effect with smaller shadows for less height */
+    filter: drop-shadow(0 0 10px #28a745)
+            drop-shadow(0 0 30px #28a745);
+    animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        filter: drop-shadow(0 0 10px #28a745)
+                drop-shadow(0 0 30px #28a745);
+    }
+    50% {
+        filter: drop-shadow(0 0 20px #28a745)
+                drop-shadow(0 0 60px #28a745);
+    }
+}
     </style>
     
     <div class="limey-feed-container">
         <!-- Toast -->
         <div id="toast" class="toast"></div>
-        
-        <!-- Header -->
-        <div class="limey-header">
-            <span class="limey-logo">Limey</span>
-            <div class="header-actions">
-                <button class="header-btn" onclick="window.location.href='/trending'">🔥</button>
-                <button class="header-btn" onclick="window.location.href='/live'">
-                    <div style="display: flex; align-items: center; gap: 4px;">
-                        <div style="width: 8px; height: 8px; background: #ef4444; border-radius: 50%; animation: pulse 2s infinite;"></div>
-                        <span style="font-size: 12px; font-weight: 600;">LIVE</span>
-                    </div>
-                </button>
-                <button class="header-btn" onclick="window.location.href='/settings'">⚙️</button>
-            </div>
-        </div>
+    
 
         <!-- Global Mute Button -->
         <button class="global-mute-btn" onclick="toggleGlobalMute()" id="globalMuteBtn">
@@ -5409,11 +5450,6 @@ function limey_video_feed_shortcode() {
                     <!-- Custom loading placeholder -->
                     <div class="video-loading-placeholder" style="display: none;">
                         <div class="loading-spinner"></div>
-                    </div>
-                    
-                    <!-- Play overlay (only shows when paused) -->
-                    <div class="play-pause-overlay" onclick="event.stopPropagation(); toggleVideoPlay(this.closest('.video-item'))">
-                        <span class="play-icon">▶️</span>
                     </div>
                 </div>
                 
@@ -5796,12 +5832,7 @@ function limey_video_feed_shortcode() {
         
         // Show feedback to user
         showToast(globalMuted ? 'Videos muted' : 'Videos unmuted');
-    }
-    
-    // Toggle like functionality (REMOVED - using the one below with proper AJAX)
-    
-    // Toggle save functionality (REMOVED - using the one below with proper AJAX)
-    
+
     // Share video functionality
     window.shareVideo = function(videoId) {
         const videoItem = document.querySelector(`[data-video-id="${videoId}"]`);
@@ -6559,6 +6590,28 @@ function limey_settings_shortcode($atts) {
     .btn-cancel:hover {
         background: rgba(255, 255, 255, 0.2);
     }
+
+    .limey-glow-outline {
+    display: inline-block;
+    font-size: 48px; /* Adjust size as needed */
+    color: #fff; /* White text */
+    padding: 10px 20px;
+    border: 3px solid #28a745; /* Green border */
+    border-radius: 10px; /* Rounded corners if desired */
+    box-shadow: 0 0 10px #28a745, 0 0 20px #28a745; /* initial glow */
+    animation: pulse-glow 2s infinite;
+    font-family: Arial, sans-serif; /* or your preferred font */
+    text-align: center;
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 10px #28a745, 0 0 20px #28a745;
+    }
+    50% {
+        box-shadow: 0 0 20px #28a745, 0 0 40px #28a745;
+    }
+}
     </style>
     
     <div class="settings-container">
@@ -7593,7 +7646,8 @@ function limey_enqueue_video_scripts() {
                 window.location.href = '/profile/' + username;
             }
         }
-        
+  //-------------------------------------------------------------------------------COMMENTS SECTION TODO --------------------//
+
         // Open comments (placeholder for now)
         window.openComments = function(videoId) {
             showToast('Comments feature coming soon!');
@@ -7791,4 +7845,9 @@ function limey_execute_page_callback($content) {
     }
     return $content;
 }
+
+function limey_site_title_shortcode() {
+    return '<div class="limey-glow-outline">Limey</div>';
+}
+add_shortcode('limey_title', 'limey_site_title_shortcode');
 ?>
